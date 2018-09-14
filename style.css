@@ -4,10 +4,35 @@
   box-sizing: border-box;
 }
 
-#canvas {
-  display: block;
-  background: black;
+.game {
+  display: flex;
+  flex-direction: column;
   max-width: 400px;
   height: 100vh;
+  background: black;
   margin: 0 auto;
+}
+
+.track-container {
+  display: flex;
+  flex: 0 0 85%;
+}
+
+.track {
+  flex: 0 0 calc(100% / 7);
+}
+
+.track:not(:last-child) {
+  border-right: 1px solid grey;
+}
+
+.key-container {
+  display: flex;
+  flex: 0 0 15%;
+}
+
+.key {
+  flex: 0 0 calc(100% / 7);
+  border: 1px solid olivedrab;
+  border-radius: 10px;
 }
