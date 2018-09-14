@@ -19,6 +19,7 @@
 }
 
 .track {
+  position: relative;
   flex: 0 0 calc(100% / 7);
 }
 
@@ -34,5 +35,27 @@
 .key {
   flex: 0 0 calc(100% / 7);
   border: 1px solid olivedrab;
-  border-radius: 10px;
+  border-radius: 15px;
+}
+
+.note {
+  background: green;
+  position: absolute;
+  width: 100%;
+  height: 15px;
+  top: -15px;
+  animation: moveDown 3s linear;
+}
+
+@keyframes moveDown {
+  0% { top: 0px; }
+  100% { top: 100%; }
+}
+
+.note--1 {
+  animation-delay: 2s;
+}
+
+.note--2 {
+  animation-delay: 3s;
 }
