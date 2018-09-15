@@ -13,6 +13,7 @@ var keyPressed = {
 var tracks = {};
 var isPlaying = false;
 var startTime;
+var keypress;
 
 var initializeNotes = function () {
   var note;
@@ -73,6 +74,8 @@ window.onload = function () {
   tracks.k = document.querySelector('.track--k');
   tracks.l = document.querySelector('.track--l');
 
+  keypress = document.querySelectorAll('.keypress');
+
   initializeNotes();
 
   document.addEventListener('animationend', function (event) {
@@ -97,6 +100,7 @@ window.onload = function () {
   document.addEventListener('keydown', function (event) {
     if (event.key === 's' && !keyPressed.s) {
       keyPressed.s = true;
+      keypress[0].style.display = 'block';
 
       if (isPlaying && tracks.s.firstChild) {
         judge('s');
@@ -105,6 +109,7 @@ window.onload = function () {
 
     if (event.key === 'd' && !keyPressed.d) {
       keyPressed.d = true;
+      keypress[1].style.display = 'block';
 
       if (isPlaying && tracks.d.firstChild) {
         judge('d');
@@ -113,6 +118,7 @@ window.onload = function () {
 
     if (event.key === 'f' && !keyPressed.f) {
       keyPressed.f = true;
+      keypress[2].style.display = 'block';
 
       if (isPlaying && tracks.f.firstChild) {
         judge('f');
@@ -121,6 +127,7 @@ window.onload = function () {
 
     if (event.key === ' ' && !keyPressed.space) {
       keyPressed.space = true;
+      keypress[3].style.display = 'block';
 
       if (isPlaying && tracks.space.firstChild) {
         judge('space');
@@ -129,6 +136,7 @@ window.onload = function () {
 
     if (event.key === 'j' && !keyPressed.j) {
       keyPressed.j = true;
+      keypress[4].style.display = 'block';
 
       if (isPlaying && tracks.j.firstChild) {
         judge('j');
@@ -137,6 +145,7 @@ window.onload = function () {
 
     if (event.key === 'k' && !keyPressed.k) {
       keyPressed.k = true;
+      keypress[5].style.display = 'block';
 
       if (isPlaying && tracks.k.firstChild) {
         judge('k');
@@ -145,6 +154,7 @@ window.onload = function () {
 
     if (event.key === 'l' && !keyPressed.l) {
       keyPressed.l = true;
+      keypress[6].style.display = 'block';
 
       if (isPlaying && tracks.l.firstChild) {
         judge('l');
@@ -155,30 +165,37 @@ window.onload = function () {
   document.addEventListener('keyup', function (event) {
     if (event.key === 's') {
       keyPressed.s = false;
+      keypress[0].style.display = 'none';
     }
 
     if (event.key === 'd') {
       keyPressed.d = false;
+      keypress[1].style.display = 'none';
     }
 
     if (event.key === 'f') {
       keyPressed.f = false;
+      keypress[2].style.display = 'none';
     }
 
     if (event.key === ' ') {
       keyPressed.space = false;
+      keypress[3].style.display = 'none';
     }
 
     if (event.key === 'j') {
       keyPressed.j = false;
+      keypress[4].style.display = 'none';
     }
 
     if (event.key === 'k') {
       keyPressed.k = false;
+      keypress[5].style.display = 'none';
     }
 
     if (event.key === 'l') {
       keyPressed.l = false;
+      keypress[6].style.display = 'none';
     }
   });
 

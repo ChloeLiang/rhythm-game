@@ -37,6 +37,23 @@
   border-left: 1px solid grey;
   border-right: 1px solid grey;
   text-align: center;
+  position: relative;
+}
+
+.key--red {
+  background: rgb(254, 45, 87);
+}
+
+.key--green {
+  background: rgb(77, 170, 87);
+}
+
+.key--blue {
+  background: rgb(28, 121, 228);
+}
+
+.key--orange {
+  background: rgb(240, 128, 60);
 }
 
 .key span {
@@ -58,18 +75,26 @@
   100% { top: 100%; }
 }
 
-.red {
-  background: #ff2c55;
+.keypress {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  top: -100%;
+  display: none;
 }
 
-.green {
-  background: #4daa57;
+.keypress--red {
+  background-image: linear-gradient(to top, rgba(254, 45, 87, .6), rgba(254, 45, 87, 0));
 }
 
-.blue {
-  background: #1c79e4;
+.keypress--green {
+  background-image: linear-gradient(to top, rgba(77, 170, 87, .6), rgba(77, 170, 87, 0));
 }
 
-.orange {
-  background: #f0803c;
+.keypress--blue {
+  background-image: linear-gradient(to top, rgba(28, 121, 228, .6), rgba(28, 121, 228, 0));
+}
+
+.keypress--orange {
+  background-image: linear-gradient(to top, rgba(240, 128, 60, .6), rgba(240, 128, 60, 0));
 }
