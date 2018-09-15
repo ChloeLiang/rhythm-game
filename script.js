@@ -52,6 +52,7 @@ var initializeNotes = function () {
       note.style.animationTimingFunction = 'linear';
       note.style.animationDuration = music[key].notes[i].duration + 's';
       note.style.animationDelay = music[key].notes[i].delay + 's';
+      note.style.animationPlayState = 'paused';
       tracks[key].appendChild(note);
     }
   }
@@ -94,6 +95,7 @@ window.onload = function () {
   tracks.j = document.querySelector('.track--j');
   tracks.k = document.querySelector('.track--k');
   tracks.l = document.querySelector('.track--l');
+
   initializeNotes();
 
   document.addEventListener('animationend', function (event) {
@@ -101,6 +103,14 @@ window.onload = function () {
     key = event.target.classList.item(1);
     music[key].next++;
     console.log(key + ' miss(): Miss');
+  });
+
+  document.addEventListener('click', function () {
+    console.log('starting...');
+    document.querySelectorAll('.note').forEach(function (note) {
+      note.style.animationPlayState = 'running';
+    });
+    start = Date.now();
   });
 
   start = Date.now();
