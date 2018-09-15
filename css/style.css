@@ -49,11 +49,3 @@
   0% { top: 0px; }
   100% { top: 100%; }
 }
-
-.note--1 {
-  animation-delay: 2s;
-}
-
-.note--2 {
-  animation-delay: 3s;
-}

@@ -1,41 +1,16 @@
-var music = {
-  // S key notes
-  s: {
-    color: 'yellow',
-    next: 0,
-    notes: [
-      {
-        duration: 3,
-        delay: 2
-      },
-      {
-        duration: 3,
-        delay: 3
-      }
-    ]
-  },
-
-  // D key notes
-  d: {
-    color: 'red',
-    next: 0,
-    notes: [
-      {
-        duration: 3,
-        delay: 4
-      },
-      {
-        duration: 3,
-        delay: 5
-      }
-    ]
-  },
-
-  // ...
+var keyPressed = {
+  s: false,
+  d: false,
+  f: false,
+  space: false,
+  j: false,
+  k: false,
+  l: false
 };
 
-var start;
 var tracks = {};
+var isPlaying = false;
+var startTime;
 
 var initializeNotes = function () {
   var note;
@@ -59,7 +34,7 @@ var initializeNotes = function () {
 };
 
 var judge = function (key) {
-  var timeInSecond = (Date.now() - start) / 1000;
+  var timeInSecond = (Date.now() - startTime) / 1000;
   var nextNoteIndex = music[key].next;
   var nextNote = music[key].notes[nextNoteIndex];
   var perfectTime = nextNote.duration + nextNote.delay;
@@ -107,38 +82,87 @@ window.onload = function () {
 
   document.addEventListener('click', function () {
     console.log('starting...');
+    isPlaying = true;
+    startTime = Date.now();
+
+    document.querySelector('.music').play();
     document.querySelectorAll('.note').forEach(function (note) {
       note.style.animationPlayState = 'running';
     });
-    start = Date.now();
+
   });
 
-  start = Date.now();
-
-  document.onkeydown = function (event) {
-    event = event || window.event;
-
-    if (event.keyCode === 83) {
-      console.log('S pressed');
-      if (tracks.s.firstChild) {
+  document.addEventListener('keydown', function (event) {
+    if (event.key === 's' && !keyPressed.s) {
+      keyPressed.s = true;
+      console.log('s pressed');
+      if (isPlaying && tracks.s.firstChild) {
         judge('s');
       }
-    } else if (event.keyCode === 68) {
-      console.log('D pressed');
-      if (tracks.d.firstChild) {
+    }
+
+    if (event.key === 'd' && !keyPressed.d) {
+      keyPressed.d = true;
+      console.log('d pressed');
+      if (isPlaying && tracks.d.firstChild) {
         judge('d');
       }
-    } else if (event.keyCode === 70) {
-      console.log('F pressed');
-    } else if (event.keyCode === 32) {
-      console.log('Space pressed');
-    } else if (event.keyCode === 74) {
-      console.log('J pressed');
-    } else if (event.keyCode === 75) {
-      console.log('K pressed');
-    } else if (event.keyCode === 76) {
-      console.log('L pressed');
     }
-  };
+
+    if (event.key === 'f' && !keyPressed.f) {
+      keyPressed.f = true;
+      console.log('f pressed');
+    }
+
+    if (event.key === ' ' && !keyPressed.space) {
+      keyPressed.space = true;
+      console.log('space pressed');
+    }
+
+    if (event.key === 'j' && !keyPressed.j) {
+      keyPressed.j = true;
+      console.log('j pressed');
+    }
+
+    if (event.key === 'k' && !keyPressed.k) {
+      keyPressed.k = true;
+      console.log('k pressed');
+    }
+
+    if (event.key === 'l' && !keyPressed.l) {
+      keyPressed.l = true;
+      console.log('l pressed');
+    }
+  });
+
+  document.addEventListener('keyup', function (event) {
+    if (event.key === 's') {
+      keyPressed.s = false;
+    }
+
+    if (event.key === 'd') {
+      keyPressed.d = false;
+    }
+
+    if (event.key === 'f') {
+      keyPressed.f = false;
+    }
+
+    if (event.key === ' ') {
+      keyPressed.space = false;
+    }
+
+    if (event.key === 'j') {
+      keyPressed.j = false;
+    }
+
+    if (event.key === 'k') {
+      keyPressed.k = false;
+    }
+
+    if (event.key === 'l') {
+      keyPressed.l = false;
+    }
+  });
 
 }
