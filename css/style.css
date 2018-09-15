@@ -46,6 +46,6 @@
 }
 
 @keyframes moveDown {
-  0% { top: 0px; }
+  0% { top: -15px; }
   100% { top: 100%; }
 }

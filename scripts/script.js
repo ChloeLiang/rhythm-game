@@ -1,3 +1,5 @@
+var music = { s: s, d: d, f: f, space: space, j: j, k: k, l: l };
+
 var keyPressed = {
   s: false,
   d: false,
@@ -49,13 +51,13 @@ var judge = function (key) {
   }
 
   if (Math.abs(accuracy) < 0.1) {
-    console.log('Perfect');
+    console.log(key, 'Perfect');
   } else if (Math.abs(accuracy) < 0.2) {
-    console.log('Good');
+    console.log(key, 'Good');
   } else if (Math.abs(accuracy) < 0.3) {
-    console.log('Bad');
+    console.log(key, 'Bad');
   } else {
-    console.log('judge(): Miss');
+    console.log(key, 'judge(): Miss');
   }
 
   tracks[key].removeChild(tracks[key].firstChild);
@@ -95,7 +97,7 @@ window.onload = function () {
   document.addEventListener('keydown', function (event) {
     if (event.key === 's' && !keyPressed.s) {
       keyPressed.s = true;
-      console.log('s pressed');
+
       if (isPlaying && tracks.s.firstChild) {
         judge('s');
       }
@@ -103,7 +105,7 @@ window.onload = function () {
 
     if (event.key === 'd' && !keyPressed.d) {
       keyPressed.d = true;
-      console.log('d pressed');
+
       if (isPlaying && tracks.d.firstChild) {
         judge('d');
       }
@@ -111,27 +113,42 @@ window.onload = function () {
 
     if (event.key === 'f' && !keyPressed.f) {
       keyPressed.f = true;
-      console.log('f pressed');
+
+      if (isPlaying && tracks.f.firstChild) {
+        judge('f');
+      }
     }
 
     if (event.key === ' ' && !keyPressed.space) {
       keyPressed.space = true;
-      console.log('space pressed');
+
+      if (isPlaying && tracks.space.firstChild) {
+        judge('space');
+      }
     }
 
     if (event.key === 'j' && !keyPressed.j) {
       keyPressed.j = true;
-      console.log('j pressed');
+
+      if (isPlaying && tracks.j.firstChild) {
+        judge('j');
+      }
     }
 
     if (event.key === 'k' && !keyPressed.k) {
       keyPressed.k = true;
-      console.log('k pressed');
+
+      if (isPlaying && tracks.k.firstChild) {
+        judge('k');
+      }
     }
 
     if (event.key === 'l' && !keyPressed.l) {
       keyPressed.l = true;
-      console.log('l pressed');
+
+      if (isPlaying && tracks.l.firstChild) {
+        judge('l');
+      }
     }
   });
 
