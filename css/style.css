@@ -34,8 +34,16 @@
 
 .key {
   flex: 0 0 calc(100% / 7);
-  border: 1px solid olivedrab;
-  border-radius: 5px;
+  border-left: 1px solid grey;
+  border-right: 1px solid grey;
+  text-align: center;
+}
+
+.key span {
+  font-weight: bold;
+  writing-mode: vertical-lr;
+  text-orientation: upright;
+  padding-top: 5px;
 }
 
 .note {
@@ -48,4 +56,20 @@
 @keyframes moveDown {
   0% { top: -15px; }
   100% { top: 100%; }
+}
+
+.red {
+  background: #ff2c55;
+}
+
+.green {
+  background: #4daa57;
+}
+
+.blue {
+  background: #1c79e4;
+}
+
+.orange {
+  background: #f0803c;
 }

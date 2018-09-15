@@ -1,4 +1,4 @@
-var music = { s: s, d: d, f: f, space: space, j: j, k: k, l: l };
+var music = { s, d, f, space, j, k, l };
 
 var keyPressed = {
   s: false,
