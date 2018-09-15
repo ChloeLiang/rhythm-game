@@ -7,7 +7,7 @@
 .game {
   display: flex;
   flex-direction: column;
-  max-width: 400px;
+  max-width: 380px;
   height: 100vh;
   background: black;
   margin: 0 auto;
@@ -35,16 +35,14 @@
 .key {
   flex: 0 0 calc(100% / 7);
   border: 1px solid olivedrab;
-  border-radius: 15px;
+  border-radius: 5px;
 }
 
 .note {
-  background: green;
   position: absolute;
   width: 100%;
   height: 15px;
   top: -15px;
-  animation: moveDown 3s linear;
 }
 
 @keyframes moveDown {
