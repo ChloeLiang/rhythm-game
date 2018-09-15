@@ -1,23 +1,43 @@
-var notes = [
-  [5, 6],
-  [],
-  [],
-  [],
-  [],
-  [],
-  []
-];
+var music = {
+  // S key notes
+  s: {
+    next: 0,
+    notes: [
+      {
+        duration: 3,
+        delay: 2
+      },
+      {
+        duration: 3,
+        delay: 3
+      }
+    ]
+  },
 
-var counter = [0, 0, 0, 0, 0, 0, 0];
+  // D key notes
+  d: {}
+  // ...
+};
+
 var start;
 
 var judge = function (key) {
   var timeInSecond = (Date.now() - start) / 1000;
-  var accuracy = timeInSecond - notes[key][counter[key]];
+  var nextNoteIndex = music[key].next;
+  var nextNote = music[key].notes[nextNoteIndex];
+  var perfectTime = nextNote.duration + nextNote.delay;
+  var accuracy = timeInSecond - perfectTime;
+
+  /**
+   * As long as the note has travelled less than 3/4 of the height of the track,
+   * any key press on this track will be ignored.
+   */
+  if (Math.abs(accuracy) > nextNote.duration / 4) {
+    return;
+  }
 
   if (Math.abs(accuracy) <= 0.1) {
     console.log('Perfect');
-
   } else if (Math.abs(accuracy) <= 0.2) {
     console.log('Good');
   } else if (Math.abs(accuracy) <= 0.3) {
@@ -26,7 +46,7 @@ var judge = function (key) {
     console.log('Miss');
   }
 
-  counter[key]++;
+  music[key].next++;
 };
 
 window.onload = function () {
@@ -37,7 +57,7 @@ window.onload = function () {
     if (event.keyCode === 83) {
       console.log('S pressed');
       // TODO: Pass in next note.
-      judge(0);
+      judge('s');
     } else if (event.keyCode === 68) {
       console.log('D pressed');
     } else if (event.keyCode === 70) {
