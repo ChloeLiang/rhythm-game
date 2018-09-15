@@ -5,6 +5,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <link href="https://fonts.googleapis.com/css?family=Playball" rel="stylesheet">
   <link rel="stylesheet" href="css/style.css">
   <title>Game</title>
 </head>
@@ -13,6 +14,11 @@
   <audio class="music" src="media/music.mp3"></audio>
 
   <div class="game">
+    <div class="score">
+      <div class="score__combo"></div>
+      <div class="score__text"></div>
+    </div>
+
     <div class="track-container">
       <div class="track track--s"></div>
       <div class="track track--d"></div>
@@ -22,6 +28,7 @@
       <div class="track track--k"></div>
       <div class="track track--l"></div>
     </div>
+
     <div class="key-container">
       <div class="key key--s key--green">
         <div class="keypress keypress--green"></div>

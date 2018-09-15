@@ -4,18 +4,63 @@
   box-sizing: border-box;
 }
 
+body {
+  font-family: "Playball";
+}
+
 .game {
   display: flex;
   flex-direction: column;
-  max-width: 380px;
+  max-width: 350px;
   height: 100vh;
   background: black;
   margin: 0 auto;
+  position: relative;
+}
+
+.score {
+  position: absolute;
+  width: 50%;
+  height: 20%;
+  top: 50%;
+  left: 50%;
+  text-align: center;
+  transform: translate(-50%, -50%);
+}
+
+.score__combo {
+  width: 100%;
+  height: 50%;
+  font-size: 4rem;
+  color: rgba(255, 199, 126, .8);
+}
+
+.score__text {
+  position: absolute;
+  width: 100%;
+  height: 50%;
+  font-size: 3rem;
+}
+
+.score__text--perfect {
+  color: rgba(255, 101, 229, .8);
+}
+
+.score__text--good {
+  color: rgba(82, 236, 51, .8);
+}
+
+.score__text--bad {
+  color: rgba(207, 53, 53, .8);
+}
+
+.score__text--miss {
+  color: rgba(255, 255, 255, .8);
 }
 
 .track-container {
   display: flex;
-  flex: 0 0 85%;
+  flex: 0 0 82%;
 }
 
 .track {
@@ -29,7 +74,7 @@
 
 .key-container {
   display: flex;
-  flex: 0 0 15%;
+  flex: 0 0 18%;
 }
 
 .key {
@@ -41,19 +86,19 @@
 }
 
 .key--red {
-  background: rgb(254, 45, 87);
+  background: rgb(254, 45, 87, .8);
 }
 
 .key--green {
-  background: rgb(77, 170, 87);
+  background: rgb(77, 170, 87, .8);
 }
 
 .key--blue {
-  background: rgb(28, 121, 228);
+  background: rgb(28, 121, 228, .8);
 }
 
 .key--orange {
-  background: rgb(240, 128, 60);
+  background: rgb(240, 128, 60, .8);
 }
 
 .key span {
@@ -68,11 +113,6 @@
   width: 100%;
   height: 15px;
   top: -15px;
-}
-
-@keyframes moveDown {
-  0% { top: -15px; }
-  100% { top: 100%; }
 }
 
 .keypress {
@@ -97,4 +137,9 @@
 
 .keypress--orange {
   background-image: linear-gradient(to top, rgba(240, 128, 60, .6), rgba(240, 128, 60, 0));
+}
+
+@keyframes moveDown {
+  0% { top: -15px; }
+  100% { top: 100%; }
 }

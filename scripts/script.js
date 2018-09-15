@@ -12,8 +12,13 @@ var keyPressed = {
 
 var tracks = {};
 var isPlaying = false;
+var combo = 0;
 var startTime;
 var keypress;
+var trackContainer;
+var scoreContainer;
+var comboText;
+var accuracyText;
 
 var initializeNotes = function () {
   var note;
@@ -52,17 +57,29 @@ var judge = function (key) {
   }
 
   if (Math.abs(accuracy) < 0.1) {
-    console.log(key, 'Perfect');
+    displayAccuracy('perfect');
+    comboText.innerHTML = ++combo;
   } else if (Math.abs(accuracy) < 0.2) {
-    console.log(key, 'Good');
+    displayAccuracy('good');
+    comboText.innerHTML = ++combo;
   } else if (Math.abs(accuracy) < 0.3) {
-    console.log(key, 'Bad');
+    displayAccuracy('bad');
+    combo = 0;
+    comboText.innerHTML = '';
   } else {
-    console.log(key, 'judge(): Miss');
+    displayAccuracy('miss');
+    combo = 0;
+    comboText.innerHTML = '';
   }
 
   tracks[key].removeChild(tracks[key].firstChild);
   music[key].next++;
+  accuracyText.classList
+};
+
+var displayAccuracy = function (accuracy) {
+  accuracyText.innerHTML = accuracy;
+  accuracyText.classList.add('score__text--' + accuracy);
 };
 
 window.onload = function () {
@@ -74,15 +91,21 @@ window.onload = function () {
   tracks.k = document.querySelector('.track--k');
   tracks.l = document.querySelector('.track--l');
 
+  trackContainer = document.querySelector('.track-container');
+  scoreContainer = document.querySelector('.score');
   keypress = document.querySelectorAll('.keypress');
+  comboText = document.querySelector('.score__combo');
+  accuracyText = document.querySelector('.score__text');
 
   initializeNotes();
 
-  document.addEventListener('animationend', function (event) {
+  trackContainer.addEventListener('animationend', function (event) {
     event.target.parentNode.removeChild(event.target);
     key = event.target.classList.item(1);
     music[key].next++;
-    console.log(key + ' miss(): Miss');
+    displayAccuracy('miss');
+    combo = 0;
+    comboText.innerHTML = '';
   });
 
   document.addEventListener('click', function () {
