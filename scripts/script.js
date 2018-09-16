@@ -1,5 +1,3 @@
-var music = { s, d, f, space, j, k, l };
-
 var keyPressed = {
   s: false,
   d: false,
@@ -78,7 +76,9 @@ var judge = function (key) {
 };
 
 var displayAccuracy = function (accuracy) {
+  var color = accuracyText.classList.item(1);
   accuracyText.innerHTML = accuracy;
+  accuracyText.classList.remove(color);
   accuracyText.classList.add('score__text--' + accuracy);
 };
 

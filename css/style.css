@@ -86,19 +86,15 @@ body {
 }
 
 .key--red {
-  background: rgb(254, 45, 87, .8);
-}
-
-.key--green {
-  background: rgb(77, 170, 87, .8);
+  background: rgba(254, 45, 87, .8);
 }
 
 .key--blue {
-  background: rgb(28, 121, 228, .8);
+  background: rgba(28, 121, 228, .8);
 }
 
 .key--orange {
-  background: rgb(240, 128, 60, .8);
+  background: rgba(240, 128, 60, .8);
 }
 
 .key span {
@@ -125,10 +121,6 @@ body {
 
 .keypress--red {
   background-image: linear-gradient(to top, rgba(254, 45, 87, .6), rgba(254, 45, 87, 0));
-}
-
-.keypress--green {
-  background-image: linear-gradient(to top, rgba(77, 170, 87, .6), rgba(77, 170, 87, 0));
 }
 
 .keypress--blue {
