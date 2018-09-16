@@ -176,4 +176,7 @@ var l = {
   ]
 };
 
-var music = { s, d, f, space, j, k, l };
+var song = {
+  length: 60000,
+  sheet: [s, d, f, space, j, k, l]
+};
