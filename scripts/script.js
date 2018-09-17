@@ -11,6 +11,7 @@ var keyPressed = {
 var isPlaying = false;
 var speed = 0;
 var combo = 0;
+var score = 0;
 var startTime;
 var trackContainer;
 var tracks;
@@ -95,6 +96,7 @@ var startTimer = function (duration) {
   var minutes;
   var seconds;
 
+  display.style.display = 'block';
   display.style.opacity = 1;
 
   var songDurationInterval = setInterval(function () {
@@ -102,12 +104,21 @@ var startTimer = function (duration) {
     seconds = timer % 60;
     minutes = minutes < 10 ? '0' + minutes : minutes;
     seconds = seconds < 10 ? '0' + seconds : seconds;
-    display.innerHTML = minutes + ' : ' + seconds;
+    display.innerHTML = minutes + ':' + seconds;
 
     if (--timer < 0) {
       clearInterval(songDurationInterval);
+      showResult();
     }
   }, 1000);
+};
+
+var showResult = function () {
+  var result = document.querySelector('.summary__result');
+  var timer = document.querySelector('.summary__timer');
+
+  timer.style.opacity = 0;
+  result.style.opacity = 1;
 };
 
 var setupNoteMiss = function () {
