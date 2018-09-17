@@ -16,10 +16,15 @@ var tracks;
 var keypress;
 var comboText;
 var accuracyText;
+var speed;
 
 var initializeNotes = function () {
   var noteElement;
   var trackElement;
+
+  while (trackContainer.hasChildNodes()) {
+    trackContainer.removeChild(trackContainer.lastChild);
+  }
 
   song.sheet.forEach(function (key, index) {
     trackElement = document.createElement('div');
@@ -39,6 +44,31 @@ var initializeNotes = function () {
     });
 
     trackContainer.appendChild(trackElement);
+  });
+};
+
+var setupStartButton = function () {
+  document.querySelector('.btn--start').addEventListener('click', function () {
+    isPlaying = true;
+    startTime = Date.now();
+
+    document.querySelector('.menu').style.opacity = 0;
+    document.querySelector('.song').play();
+    document.querySelectorAll('.note').forEach(function (note) {
+      note.style.animationPlayState = 'running';
+    });
+  });
+};
+
+var setupNoteMiss = function () {
+  trackContainer.addEventListener('animationend', function (event) {
+    var index;
+    event.target.parentNode.removeChild(event.target);
+    index = event.target.classList.item(1)[6];
+    song.sheet[index].next++;
+    displayAccuracy('miss');
+    combo = 0;
+    comboText.innerHTML = '';
   });
 };
 
@@ -202,28 +232,7 @@ window.onload = function () {
 
   tracks = document.querySelectorAll('.track');
 
-  trackContainer.addEventListener('animationend', function (event) {
-    var index;
-    event.target.parentNode.removeChild(event.target);
-    index = event.target.classList.item(1)[6];
-    song.sheet[index].next++;
-    displayAccuracy('miss');
-    combo = 0;
-    comboText.innerHTML = '';
-  });
-
   setupKeys();
-
-  document.addEventListener('click', function () {
-    console.log('starting...');
-    isPlaying = true;
-    startTime = Date.now();
-
-    document.querySelector('.song').play();
-    document.querySelectorAll('.note').forEach(function (note) {
-      note.style.animationPlayState = 'running';
-    });
-
-  });
-
+  setupStartButton();
+  setupNoteMiss();
 }

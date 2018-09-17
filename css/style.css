@@ -4,15 +4,31 @@
   box-sizing: border-box;
 }
 
+html {
+  font-size: 62.5%;
+}
+
 body {
   font-family: "Playball";
+  background: linear-gradient(to top, rgba(0, 0, 0, 1), rgba(0, 0, 0, .8));
+}
+
+main {
+  height: 100vh;
+  width: 100vw;
+  display: flex;
+}
+
+h2 {
+  padding: 1rem;
+  text-transform: uppercase;
 }
 
 .game {
   display: flex;
+  flex: 0 0 calc(100% / 2);
   flex-direction: column;
-  max-width: 350px;
-  height: 100vh;
+  max-width: 35rem;
   background: black;
   margin: 0 auto;
   position: relative;
@@ -83,6 +99,7 @@ body {
   border-right: 1px solid grey;
   text-align: center;
   position: relative;
+  font-size: 1.6rem;
 }
 
 .key--red {
@@ -101,14 +118,14 @@ body {
   font-weight: bold;
   writing-mode: vertical-lr;
   text-orientation: upright;
-  padding-top: 5px;
+  padding-top: .5rem;
 }
 
 .note {
   position: absolute;
   width: 100%;
-  height: 15px;
-  top: -15px;
+  height: 1.5rem;
+  top: -1.5rem;
 }
 
 .keypress {
@@ -131,7 +148,59 @@ body {
   background-image: linear-gradient(to top, rgba(240, 128, 60, .6), rgba(240, 128, 60, 0));
 }
 
+.menu {
+  display: flex;
+  flex-direction: column;
+  flex: 0 0 calc(100% / 2);
+  font-size: 2rem;
+  color: white;
+  text-align: center;
+  justify-content: space-around;
+  transition: all 1s;
+}
+
+.song_author {
+  text-decoration: none;
+  color: yellow;
+}
+
+.btn:link,
+.btn:visited {
+  display: inline-block;
+  border: 1px solid white;
+  font-size: 1.6rem;
+  text-transform: uppercase;
+  text-decoration: none;
+  transition: all .2s;
+  color: white;
+
+  margin: 0 auto;
+  transition: all .2s;
+}
+
+.btn:hover,
+.btn:active {
+  background: white;
+  color: black;
+}
+
+.btn--small {
+  padding: 2.5rem;
+  border-radius: 50%;
+}
+
+.btn--primary {
+  border-radius: 1rem;
+  padding: 2rem 4rem;
+}
+
+.menu__speed .btn--selected {
+  background: white;
+  color: black;
+}
+
 @keyframes moveDown {
-  0% { top: -15px; }
-  100% { top: 100%; }
+  0% { top: -1.5rem; }
+  98% { top: 100%; opacity: 1; }
+  100% { top: 105%; opacity: 0; }
 }
