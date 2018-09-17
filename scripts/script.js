@@ -248,14 +248,14 @@ var displayAccuracy = function (accuracy) {
   var color = accuracyText.classList.item(1);
   accuracyText.innerHTML = accuracy;
   accuracyText.classList.remove(color);
-  accuracyText.classList.add('score__text--' + accuracy);
+  accuracyText.classList.add('hit__accuracy--' + accuracy);
 };
 
 window.onload = function () {
   trackContainer = document.querySelector('.track-container');
   keypress = document.querySelectorAll('.keypress');
-  comboText = document.querySelector('.score__combo');
-  accuracyText = document.querySelector('.score__text');
+  comboText = document.querySelector('.hit__combo');
+  accuracyText = document.querySelector('.hit__accuracy');
 
   initializeNotes();
   setupSpeed();
