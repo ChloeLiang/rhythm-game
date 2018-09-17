@@ -8,6 +8,7 @@ var keyPressed = {
   l: false
 };
 
+var hits = { perfect: 0, good: 0, bad: 0, miss: 0 };
 var isPlaying = false;
 var speed = 0;
 var combo = 0;
@@ -116,7 +117,15 @@ var startTimer = function (duration) {
 var showResult = function () {
   var result = document.querySelector('.summary__result');
   var timer = document.querySelector('.summary__timer');
+  var perfect = document.querySelector('.perfect__count');
+  var good = document.querySelector('.good__count');
+  var bad = document.querySelector('.bad__count');
+  var miss = document.querySelector('.miss__count');
 
+  perfect.innerHTML = hits.perfect;
+  good.innerHTML = hits.good;
+  bad.innerHTML = hits.bad;
+  miss.innerHTML = hits.miss;
   timer.style.opacity = 0;
   result.style.opacity = 1;
 };
@@ -128,6 +137,7 @@ var setupNoteMiss = function () {
     index = event.target.classList.item(1)[6];
     song.sheet[index].next++;
     displayAccuracy('miss');
+    hits.miss++;
     combo = 0;
     comboText.innerHTML = '';
   });
@@ -259,16 +269,20 @@ var judge = function (index) {
 
   if (Math.abs(accuracy) < 0.1) {
     displayAccuracy('perfect');
+    hits.perfect++;
     comboText.innerHTML = ++combo;
   } else if (Math.abs(accuracy) < 0.2) {
     displayAccuracy('good');
+    hits.good++;
     comboText.innerHTML = ++combo;
   } else if (Math.abs(accuracy) < 0.3) {
     displayAccuracy('bad');
+    hits.bad++;
     combo = 0;
     comboText.innerHTML = '';
   } else {
     displayAccuracy('miss');
+    hits.miss++;
     combo = 0;
     comboText.innerHTML = '';
   }
