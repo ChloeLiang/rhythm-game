@@ -80,12 +80,34 @@ var setupStartButton = function () {
     isPlaying = true;
     startTime = Date.now();
 
+    startTimer(song.duration);
     document.querySelector('.menu').style.opacity = 0;
     document.querySelector('.song').play();
     document.querySelectorAll('.note').forEach(function (note) {
       note.style.animationPlayState = 'running';
     });
   });
+};
+
+var startTimer = function (duration) {
+  var display = document.querySelector('.summary__timer');
+  var timer = duration;
+  var minutes;
+  var seconds;
+
+  display.style.opacity = 1;
+
+  var songDurationInterval = setInterval(function () {
+    minutes = Math.floor(timer / 60);
+    seconds = timer % 60;
+    minutes = minutes < 10 ? '0' + minutes : minutes;
+    seconds = seconds < 10 ? '0' + seconds : seconds;
+    display.innerHTML = minutes + ' : ' + seconds;
+
+    if (--timer < 0) {
+      clearInterval(songDurationInterval);
+    }
+  }, 1000);
 };
 
 var setupNoteMiss = function () {

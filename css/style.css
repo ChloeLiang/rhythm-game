@@ -11,6 +11,7 @@ html {
 body {
   font-family: "Playball";
   background: linear-gradient(to top, rgba(0, 0, 0, 1), rgba(0, 0, 0, .8));
+  overflow: hidden;
 }
 
 main {
@@ -25,6 +26,7 @@ h2 {
 }
 
 .game {
+  position: relative;
   display: flex;
   flex: 0 0 calc(100% / 2);
   flex-direction: column;
@@ -76,7 +78,7 @@ h2 {
 
 .track-container {
   display: flex;
-  flex: 0 0 82%;
+  flex: 1 0 auto;
 }
 
 .track {
@@ -90,7 +92,7 @@ h2 {
 
 .key-container {
   display: flex;
-  flex: 0 0 18%;
+  flex: 0 0 15%;
 }
 
 .key {
@@ -197,6 +199,39 @@ h2 {
 .menu__speed .btn--selected {
   background: white;
   color: black;
+}
+
+.summary {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  position: absolute;
+  width: 50%;
+  height: 100%;
+  left: 50%;
+  color: white;
+  text-align: center;
+  z-index: -100;
+}
+
+.summary__timer {
+  position: absolute;
+  width: 100%;
+  font-size: 6rem;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  opacity: 0;
+  transition: all 1s;
+}
+
+.summary__result {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  opacity: 0;
+  transition: all 1s;
 }
 
 @keyframes moveDown {
