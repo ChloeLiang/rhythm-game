@@ -320,11 +320,12 @@ var judge = function (index) {
 };
 
 var displayAccuracy = function (accuracy) {
-  var accuracyText = document.querySelector('.hit__accuracy');
-  var color = accuracyText.classList.item(1);
-  accuracyText.innerHTML = accuracy;
-  accuracyText.classList.remove(color);
+  document.querySelector('.hit__accuracy').remove();
+  var accuracyText = document.createElement('div');
+  accuracyText.classList.add('hit__accuracy');
   accuracyText.classList.add('hit__accuracy--' + accuracy);
+  accuracyText.innerHTML = accuracy;
+  document.querySelector('.hit').appendChild(accuracyText);
 };
 
 window.onload = function () {
