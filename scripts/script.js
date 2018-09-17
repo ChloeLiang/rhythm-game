@@ -12,6 +12,7 @@ var hits = { perfect: 0, good: 0, bad: 0, miss: 0 };
 var isPlaying = false;
 var speed = 0;
 var combo = 0;
+var maxCombo = 0;
 var score = 0;
 var startTime;
 var trackContainer;
@@ -115,19 +116,13 @@ var startTimer = function (duration) {
 };
 
 var showResult = function () {
-  var result = document.querySelector('.summary__result');
-  var timer = document.querySelector('.summary__timer');
-  var perfect = document.querySelector('.perfect__count');
-  var good = document.querySelector('.good__count');
-  var bad = document.querySelector('.bad__count');
-  var miss = document.querySelector('.miss__count');
-
-  perfect.innerHTML = hits.perfect;
-  good.innerHTML = hits.good;
-  bad.innerHTML = hits.bad;
-  miss.innerHTML = hits.miss;
-  timer.style.opacity = 0;
-  result.style.opacity = 1;
+  document.querySelector('.perfect__count').innerHTML = hits.perfect;
+  document.querySelector('.good__count').innerHTML = hits.good;
+  document.querySelector('.bad__count').innerHTML = hits.bad;
+  document.querySelector('.miss__count').innerHTML = hits.miss;
+  document.querySelector('.combo__count').innerHTML = maxCombo;
+  document.querySelector('.summary__timer').style.opacity = 0;
+  document.querySelector('.summary__result').style.opacity = 1;
 };
 
 var setupNoteMiss = function () {
@@ -138,6 +133,7 @@ var setupNoteMiss = function () {
     song.sheet[index].next++;
     displayAccuracy('miss');
     hits.miss++;
+    maxCombo = maxCombo > combo ? maxCombo : combo;
     combo = 0;
     comboText.innerHTML = '';
   });
@@ -287,6 +283,7 @@ var judge = function (index) {
     comboText.innerHTML = '';
   }
 
+  maxCombo = maxCombo > combo ? maxCombo : combo;
   tracks[index].removeChild(tracks[index].firstChild);
   song.sheet[index].next++;
 };
