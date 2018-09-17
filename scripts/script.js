@@ -9,6 +9,7 @@ var keyPressed = {
 };
 
 var isPlaying = false;
+var speed = 0;
 var combo = 0;
 var startTime;
 var trackContainer;
@@ -16,7 +17,6 @@ var tracks;
 var keypress;
 var comboText;
 var accuracyText;
-var speed;
 
 var initializeNotes = function () {
   var noteElement;
@@ -37,13 +37,41 @@ var initializeNotes = function () {
       noteElement.style.backgroundColor = key.color;
       noteElement.style.animationName = 'moveDown';
       noteElement.style.animationTimingFunction = 'linear';
-      noteElement.style.animationDuration = note.duration + 's';
-      noteElement.style.animationDelay = note.delay + 's';
+      noteElement.style.animationDuration = note.duration - speed + 's';
+      noteElement.style.animationDelay = note.delay + speed + 's';
       noteElement.style.animationPlayState = 'paused';
       trackElement.appendChild(noteElement);
     });
 
     trackContainer.appendChild(trackElement);
+    tracks = document.querySelectorAll('.track');
+  });
+};
+
+var setupSpeed = function () {
+  var buttons = document.querySelectorAll('.btn--small');
+
+  buttons.forEach(function (button) {
+    button.addEventListener('click', function () {
+      if (this.innerHTML === '1x') {
+        buttons[0].className = 'btn btn--small btn--selected';
+        buttons[1].className = 'btn btn--small';
+        buttons[2].className = 'btn btn--small';
+        speed = parseInt(this.innerHTML) - 1;
+      } else if (this.innerHTML === '2x') {
+        buttons[0].className = 'btn btn--small';
+        buttons[1].className = 'btn btn--small btn--selected';
+        buttons[2].className = 'btn btn--small';
+        speed = parseInt(this.innerHTML) - 1;
+      } else if (this.innerHTML === '3x') {
+        buttons[0].className = 'btn btn--small';
+        buttons[1].className = 'btn btn--small';
+        buttons[2].className = 'btn btn--small btn--selected';
+        speed = parseInt(this.innerHTML) - 1;
+      }
+
+      initializeNotes();
+    });
   });
 };
 
@@ -185,13 +213,14 @@ var judge = function (index) {
   var nextNoteIndex = song.sheet[index].next;
   var nextNote = song.sheet[index].notes[nextNoteIndex];
   var perfectTime = nextNote.duration + nextNote.delay;
-  var accuracy = timeInSecond - perfectTime;
+  var accuracy = Math.abs(timeInSecond - perfectTime);
 
   /**
    * As long as the note has travelled less than 3/4 of the height of the track,
    * any key press on this track will be ignored.
    */
-  if (Math.abs(accuracy) > nextNote.duration / 4) {
+
+  if (Math.abs(accuracy) > (nextNote.duration - speed) / 4) {
     return;
   }
 
@@ -229,10 +258,8 @@ window.onload = function () {
   accuracyText = document.querySelector('.score__text');
 
   initializeNotes();
-
-  tracks = document.querySelectorAll('.track');
-
-  setupKeys();
+  setupSpeed();
   setupStartButton();
+  setupKeys();
   setupNoteMiss();
 }
