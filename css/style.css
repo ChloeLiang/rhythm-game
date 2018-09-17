@@ -67,22 +67,32 @@ h2 {
   width: 100%;
   height: 50%;
   font-size: 3rem;
+  opacity: 0;
+  transition: all .2s;
 }
 
 .hit__accuracy--perfect {
   color: var(--perfect-color);
+  opacity: 1;
+  animation: fade .2s;
 }
 
 .hit__accuracy--good {
   color: var(--good-color);
+  opacity: 1;
+  animation: fade .2s;
 }
 
 .hit__accuracy--bad {
   color: var(--bad-color);
+  opacity: 1;
+  animation: fade .2s;
 }
 
 .hit__accuracy--miss {
   color: var(--miss-color);
+  opacity: 1;
+  animation: fade .2s;
 }
 
 .track-container {
@@ -294,4 +304,9 @@ h2 {
   0% { top: -1.5rem; }
   98% { top: 100%; opacity: 1; }
   100% { top: 105%; opacity: 0; }
+}
+
+@keyframes fade {
+  0% { opacity: 1; }
+  100% { opacity: 0; }
 }

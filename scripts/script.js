@@ -26,7 +26,6 @@ var trackContainer;
 var tracks;
 var keypress;
 var comboText;
-var accuracyText;
 
 var initializeNotes = function () {
   var noteElement;
@@ -277,9 +276,11 @@ var judge = function (index) {
     comboText.innerHTML = ++combo;
 
     if (combo >= 80) {
-      score += 1000 * multiplier.perfect * multiplier.combo40;
-    } else if (combo >= 40) {
       score += 1000 * multiplier.perfect * multiplier.combo80;
+    } else if (combo >= 40) {
+      score += 1000 * multiplier.perfect * multiplier.combo40;
+    } else {
+      score += 1000 * multiplier.perfect;
     }
   } else if (Math.abs(accuracy) < 0.2) {
     displayAccuracy('good');
@@ -287,9 +288,11 @@ var judge = function (index) {
     comboText.innerHTML = ++combo;
 
     if (combo >= 80) {
-      score += 1000 * multiplier.good * multiplier.combo40;
-    } else if (combo >= 40) {
       score += 1000 * multiplier.good * multiplier.combo80;
+    } else if (combo >= 40) {
+      score += 1000 * multiplier.good * multiplier.combo40;
+    } else {
+      score += 1000 * multiplier.good;
     }
   } else if (Math.abs(accuracy) < 0.3) {
     displayAccuracy('bad');
@@ -301,6 +304,8 @@ var judge = function (index) {
       score += 1000 * multiplier.bad * multiplier.combo40;
     } else if (combo >= 40) {
       score += 1000 * multiplier.bad * multiplier.combo80;
+    } else {
+      score += 1000 * multiplier.bad;
     }
   } else {
     displayAccuracy('miss');
@@ -315,6 +320,7 @@ var judge = function (index) {
 };
 
 var displayAccuracy = function (accuracy) {
+  var accuracyText = document.querySelector('.hit__accuracy');
   var color = accuracyText.classList.item(1);
   accuracyText.innerHTML = accuracy;
   accuracyText.classList.remove(color);
@@ -325,7 +331,6 @@ window.onload = function () {
   trackContainer = document.querySelector('.track-container');
   keypress = document.querySelectorAll('.keypress');
   comboText = document.querySelector('.hit__combo');
-  accuracyText = document.querySelector('.hit__accuracy');
 
   initializeNotes();
   setupSpeed();
