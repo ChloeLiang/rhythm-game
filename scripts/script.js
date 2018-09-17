@@ -9,6 +9,13 @@ var keyPressed = {
 };
 
 var hits = { perfect: 0, good: 0, bad: 0, miss: 0 };
+var multiplier = {
+  perfect: 1,
+  good: 0.8,
+  bad: 0.5,
+  combo40: 1.05,
+  combo80: 1.10
+};
 var isPlaying = false;
 var speed = 0;
 var combo = 0;
@@ -121,6 +128,7 @@ var showResult = function () {
   document.querySelector('.bad__count').innerHTML = hits.bad;
   document.querySelector('.miss__count').innerHTML = hits.miss;
   document.querySelector('.combo__count').innerHTML = maxCombo;
+  document.querySelector('.score__count').innerHTML = score;
   document.querySelector('.summary__timer').style.opacity = 0;
   document.querySelector('.summary__result').style.opacity = 1;
 };
@@ -267,15 +275,33 @@ var judge = function (index) {
     displayAccuracy('perfect');
     hits.perfect++;
     comboText.innerHTML = ++combo;
+
+    if (combo >= 80) {
+      score += 1000 * multiplier.perfect * multiplier.combo40;
+    } else if (combo >= 40) {
+      score += 1000 * multiplier.perfect * multiplier.combo80;
+    }
   } else if (Math.abs(accuracy) < 0.2) {
     displayAccuracy('good');
     hits.good++;
     comboText.innerHTML = ++combo;
+
+    if (combo >= 80) {
+      score += 1000 * multiplier.good * multiplier.combo40;
+    } else if (combo >= 40) {
+      score += 1000 * multiplier.good * multiplier.combo80;
+    }
   } else if (Math.abs(accuracy) < 0.3) {
     displayAccuracy('bad');
     hits.bad++;
     combo = 0;
     comboText.innerHTML = '';
+
+    if (combo >= 80) {
+      score += 1000 * multiplier.bad * multiplier.combo40;
+    } else if (combo >= 40) {
+      score += 1000 * multiplier.bad * multiplier.combo80;
+    }
   } else {
     displayAccuracy('miss');
     hits.miss++;

@@ -8,7 +8,9 @@
   --perfect-color: rgba(255, 101, 229, .8);
   --good-color: rgba(82, 236, 51, .8);
   --bad-color: rgba(207, 53, 53, .8);
-  --miss-color: rgba(199, 184, 184, 0.8);
+  --miss-color: rgba(199, 184, 184, .8);
+  --maxcombo-color: rgba(0, 110, 255, .8);
+  --score-color: rgba(240, 202, 36, .8);
 }
 
 html {
@@ -278,6 +280,14 @@ h2 {
 
 .miss {
   color: var(--miss-color);
+}
+
+.combo {
+  color: var(--maxcombo-color);
+}
+
+.score {
+  color: var(--score-color);
 }
 
 @keyframes moveDown {
