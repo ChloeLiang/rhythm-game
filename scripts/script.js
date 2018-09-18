@@ -272,6 +272,7 @@ var judge = function (index) {
 
   if (Math.abs(accuracy) < 0.1) {
     displayAccuracy('perfect');
+    showHitEffect(index);
     hits.perfect++;
     comboText.innerHTML = ++combo;
 
@@ -284,6 +285,7 @@ var judge = function (index) {
     }
   } else if (Math.abs(accuracy) < 0.2) {
     displayAccuracy('good');
+    showHitEffect(index);
     hits.good++;
     comboText.innerHTML = ++combo;
 
@@ -296,6 +298,7 @@ var judge = function (index) {
     }
   } else if (Math.abs(accuracy) < 0.3) {
     displayAccuracy('bad');
+    showHitEffect(index);
     hits.bad++;
     combo = 0;
     comboText.innerHTML = '';
@@ -326,6 +329,13 @@ var displayAccuracy = function (accuracy) {
   accuracyText.classList.add('hit__accuracy--' + accuracy);
   accuracyText.innerHTML = accuracy;
   document.querySelector('.hit').appendChild(accuracyText);
+};
+
+var showHitEffect = function (index) {
+  var key = document.querySelectorAll('.key')[index];
+  var hitEffect = document.createElement('div');
+  hitEffect.classList.add('key__hit');
+  key.appendChild(hitEffect);
 };
 
 window.onload = function () {

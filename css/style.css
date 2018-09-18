@@ -155,6 +155,20 @@ h2 {
   display: none;
 }
 
+.key__hit {
+  position: absolute;
+  width: 60%;
+  height: 1.5rem;
+  top: 0;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  transform-origin: 0 0;
+  background: linear-gradient(to bottom, rgba(255, 255, 255, .8), rgba(255, 255, 255, .5));
+  opacity: 0;
+  border-radius: 50%;
+  animation: scaleFade 1s;
+}
+
 .keypress--red {
   background-image: linear-gradient(to top, rgba(254, 45, 87, .6), rgba(254, 45, 87, 0));
 }
@@ -307,4 +321,9 @@ h2 {
 @keyframes fade {
   10% { opacity: 1; }
   100% { opacity: 0; }
+}
+
+@keyframes scaleFade {
+  0% { opacity: 1; width: 60%; }
+  100% { opacity: 0; width: 100%; }
 }
