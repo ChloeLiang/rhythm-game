@@ -193,7 +193,11 @@ h2 {
   transition: all 1s;
 }
 
-.song_author {
+.heart {
+  color: rgb(255, 59, 59);
+}
+
+.author {
   text-decoration: underline;
   color: white;
 }
