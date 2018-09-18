@@ -5,12 +5,20 @@
 }
 
 :root {
+  --background: linear-gradient(to top, rgba(0, 0, 0, 1), rgba(0, 0, 0, .8));
   --perfect-color: rgba(255, 101, 229, .8);
   --good-color: rgba(82, 236, 51, .8);
   --bad-color: rgba(207, 53, 53, .8);
   --miss-color: rgba(199, 184, 184, .8);
   --maxcombo-color: rgba(0, 110, 255, .8);
   --score-color: rgba(240, 202, 36, .8);
+  --hit-effect: linear-gradient(to bottom, rgba(255, 255, 255, .5), rgba(255, 255, 255, .3));
+  --key-red: rgba(254, 45, 87, .8);
+  --key-blue: rgba(28, 121, 228, .8);
+  --key-orange: rgba(240, 128, 60, .8);
+  --keypress-red: linear-gradient(to top, rgba(254, 45, 87, .6), rgba(254, 45, 87, 0));
+  --keypress-blue: linear-gradient(to top, rgba(28, 121, 228, .6), rgba(28, 121, 228, 0));
+  --keypress-orange: linear-gradient(to top, rgba(240, 128, 60, .6), rgba(240, 128, 60, 0));
 }
 
 html {
@@ -19,7 +27,7 @@ html {
 
 body {
   font-family: "Playball";
-  background: linear-gradient(to top, rgba(0, 0, 0, 1), rgba(0, 0, 0, .8));
+  background: var(--background);
   overflow: hidden;
 }
 
@@ -122,15 +130,15 @@ h2 {
 }
 
 .key--red {
-  background: rgba(254, 45, 87, .8);
+  background: var(--key-red);
 }
 
 .key--blue {
-  background: rgba(28, 121, 228, .8);
+  background: var(--key-blue);
 }
 
 .key--orange {
-  background: rgba(240, 128, 60, .8);
+  background: var(--key-orange);
 }
 
 .key span {
@@ -157,28 +165,28 @@ h2 {
 
 .key__hit {
   position: absolute;
-  width: 60%;
+  width: 90%;
   height: 1.5rem;
   top: 0;
   left: 50%;
   transform: translate(-50%, -50%);
   transform-origin: 0 0;
-  background: linear-gradient(to bottom, rgba(255, 255, 255, .8), rgba(255, 255, 255, .5));
+  background: var(--hit-effect);
   opacity: 0;
   border-radius: 50%;
   animation: scaleFade 1s;
 }
 
 .keypress--red {
-  background-image: linear-gradient(to top, rgba(254, 45, 87, .6), rgba(254, 45, 87, 0));
+  background-image: var(--keypress-red);
 }
 
 .keypress--blue {
-  background-image: linear-gradient(to top, rgba(28, 121, 228, .6), rgba(28, 121, 228, 0));
+  background-image: var(--keypress-blue);
 }
 
 .keypress--orange {
-  background-image: linear-gradient(to top, rgba(240, 128, 60, .6), rgba(240, 128, 60, 0));
+  background-image: var(--keypress-orange);
 }
 
 .menu {
@@ -328,6 +336,6 @@ h2 {
 }
 
 @keyframes scaleFade {
-  0% { opacity: 1; width: 60%; }
-  100% { opacity: 0; width: 100%; }
+  0% { opacity: 1; width: 90%; }
+  100% { opacity: 0; width: 200%; }
 }
