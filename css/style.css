@@ -13,9 +13,9 @@
   --maxcombo-color: rgba(0, 110, 255, .8);
   --score-color: rgba(240, 202, 36, .8);
   --hit-effect: linear-gradient(to bottom, rgba(255, 255, 255, .5), rgba(255, 255, 255, .3));
-  --key-red: rgba(254, 45, 87, .8);
-  --key-blue: rgba(28, 121, 228, .8);
-  --key-orange: rgba(240, 128, 60, .8);
+  --key-red: rgba(254, 45, 87, 1);
+  --key-blue: rgba(28, 121, 228, 1);
+  --key-orange: rgba(240, 128, 60, 1);
   --keypress-red: linear-gradient(to top, rgba(254, 45, 87, .6), rgba(254, 45, 87, 0));
   --keypress-blue: linear-gradient(to top, rgba(28, 121, 228, .6), rgba(28, 121, 228, 0));
   --keypress-orange: linear-gradient(to top, rgba(240, 128, 60, .6), rgba(240, 128, 60, 0));
