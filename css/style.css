@@ -12,7 +12,8 @@
   --miss-color: rgba(199, 184, 184, .8);
   --maxcombo-color: rgba(0, 110, 255, .8);
   --score-color: rgba(240, 202, 36, .8);
-  --hit-effect: linear-gradient(to bottom, rgba(255, 255, 255, .5), rgba(255, 255, 255, .3));
+  /* --hit-effect: linear-gradient(to bottom, rgba(255, 255, 255, .5), rgba(255, 255, 255, .3)); */
+  --hit-color: rgba(255, 255, 255, .8);
   --key-red: rgba(254, 45, 87, 1);
   --key-blue: rgba(28, 121, 228, 1);
   --key-orange: rgba(240, 128, 60, 1);
@@ -165,16 +166,29 @@ h2 {
 
 .key__hit {
   position: absolute;
-  width: 90%;
-  height: 1.5rem;
+  width: 2rem;
+  height: 2rem;
   top: 0;
   left: 50%;
   transform: translate(-50%, -50%);
   transform-origin: 0 0;
-  background: var(--hit-effect);
+  background: var(--hit-color);
   opacity: 0;
   border-radius: 50%;
   animation: scaleFade 1s;
+}
+
+.key__hit:after {
+  content: "";
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  border: 2px solid var(--hit-color);
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+  animation: scaleBorder 1s;
 }
 
 .keypress--red {
@@ -338,4 +352,24 @@ h2 {
 @keyframes scaleFade {
   0% { opacity: 1; width: 90%; }
   100% { opacity: 0; width: 200%; }
+}
+
+@keyframes scaleFade {
+  0% {
+    opacity: 1;
+  }
+
+  100% {
+    opacity: 0;
+    width: 4rem;
+    height: 4rem;
+  }
+}
+
+@keyframes scaleBorder {
+  100% {
+    width: 10rem;
+    height: 10rem;
+    border: 2px solid transparent;
+  }
 }
