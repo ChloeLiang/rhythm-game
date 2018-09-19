@@ -1,4 +1,4 @@
-var keyPressed = {
+var isHolding = {
   s: false,
   d: false,
   f: false,
@@ -134,15 +134,14 @@ var showResult = function () {
 
 var setupNoteMiss = function () {
   trackContainer.addEventListener('animationend', function (event) {
-    var index;
-    event.target.parentNode.removeChild(event.target);
-    index = event.target.classList.item(1)[6];
-    song.sheet[index].next++;
+    var index = event.target.classList.item(1)[6];
+
     displayAccuracy('miss');
-    hits.miss++;
-    maxCombo = maxCombo > combo ? maxCombo : combo;
-    combo = 0;
-    comboText.innerHTML = '';
+    updateHits('miss');
+    updateCombo('miss');
+    updateMaxCombo();
+    removeNoteFromTrack(event.target.parentNode, event.target);
+    updateNext(index);
   });
 };
 
@@ -152,106 +151,41 @@ var setupNoteMiss = function () {
  */
 var setupKeys = function () {
   document.addEventListener('keydown', function (event) {
-    if (event.key === 's' && !keyPressed.s) {
-      keyPressed.s = true;
-      keypress[0].style.display = 'block';
+    var keyIndex = getKeyIndex(event.key);
 
-      if (isPlaying && tracks[0].firstChild) {
-        judge(0);
-      }
-    }
+    if (!isHolding[event.key]) {
+      isHolding[event.key] = true;
+      keypress[keyIndex].style.display = 'block';
 
-    if (event.key === 'd' && !keyPressed.d) {
-      keyPressed.d = true;
-      keypress[1].style.display = 'block';
-
-      if (isPlaying && tracks[1].firstChild) {
-        judge(1);
-      }
-    }
-
-    if (event.key === 'f' && !keyPressed.f) {
-      keyPressed.f = true;
-      keypress[2].style.display = 'block';
-
-      if (isPlaying && tracks[2].firstChild) {
-        judge(2);
-      }
-    }
-
-    if (event.key === ' ' && !keyPressed.space) {
-      keyPressed.space = true;
-      keypress[3].style.display = 'block';
-
-      if (isPlaying && tracks[3].firstChild) {
-        judge(3);
-      }
-    }
-
-    if (event.key === 'j' && !keyPressed.j) {
-      keyPressed.j = true;
-      keypress[4].style.display = 'block';
-
-      if (isPlaying && tracks[4].firstChild) {
-        judge(4);
-      }
-    }
-
-    if (event.key === 'k' && !keyPressed.k) {
-      keyPressed.k = true;
-      keypress[5].style.display = 'block';
-
-      if (isPlaying && tracks[5].firstChild) {
-        judge(5);
-      }
-    }
-
-    if (event.key === 'l' && !keyPressed.l) {
-      keyPressed.l = true;
-      keypress[6].style.display = 'block';
-
-      if (isPlaying && tracks[6].firstChild) {
-        judge(6);
+      if (isPlaying && tracks[keyIndex].firstChild) {
+        judge(keyIndex);
       }
     }
   });
 
   document.addEventListener('keyup', function (event) {
-    if (event.key === 's') {
-      keyPressed.s = false;
-      keypress[0].style.display = 'none';
-    }
-
-    if (event.key === 'd') {
-      keyPressed.d = false;
-      keypress[1].style.display = 'none';
-    }
-
-    if (event.key === 'f') {
-      keyPressed.f = false;
-      keypress[2].style.display = 'none';
-    }
-
-    if (event.key === ' ') {
-      keyPressed.space = false;
-      keypress[3].style.display = 'none';
-    }
-
-    if (event.key === 'j') {
-      keyPressed.j = false;
-      keypress[4].style.display = 'none';
-    }
-
-    if (event.key === 'k') {
-      keyPressed.k = false;
-      keypress[5].style.display = 'none';
-    }
-
-    if (event.key === 'l') {
-      keyPressed.l = false;
-      keypress[6].style.display = 'none';
-    }
+    var keyIndex = getKeyIndex(event.key);
+    isHolding[event.key] = false;
+    keypress[keyIndex].style.display = 'none';
   });
+};
+
+var getKeyIndex = function (key) {
+  if (key === 's') {
+    return 0;
+  } else if (key === 'd') {
+    return 1;
+  } else if (key === 'f') {
+    return 2;
+  } else if (key === ' ') {
+    return 3;
+  } else if (key === 'j') {
+    return 4;
+  } else if (key === 'k') {
+    return 5;
+  } else if (key === 'l') {
+    return 6;
+  }
 };
 
 var judge = function (index) {
@@ -260,71 +194,42 @@ var judge = function (index) {
   var nextNote = song.sheet[index].notes[nextNoteIndex];
   var perfectTime = nextNote.duration + nextNote.delay;
   var accuracy = Math.abs(timeInSecond - perfectTime);
+  var hitJudgement;
 
   /**
    * As long as the note has travelled less than 3/4 of the height of the track,
    * any key press on this track will be ignored.
    */
-
-  if (Math.abs(accuracy) > (nextNote.duration - speed) / 4) {
+  if (accuracy > (nextNote.duration - speed) / 4) {
     return;
   }
 
-  if (Math.abs(accuracy) < 0.1) {
-    displayAccuracy('perfect');
-    showHitEffect(index);
-    hits.perfect++;
-    comboText.innerHTML = ++combo;
+  hitJudgement = getHitJudgement(accuracy);
+  displayAccuracy(hitJudgement);
+  showHitEffect(index);
+  updateHits(hitJudgement);
+  updateCombo(hitJudgement);
+  updateMaxCombo();
+  calculateScore(hitJudgement);
+  removeNoteFromTrack(tracks[index], tracks[index].firstChild);
+  updateNext(index);
+};
 
-    if (combo >= 80) {
-      score += 1000 * multiplier.perfect * multiplier.combo80;
-    } else if (combo >= 40) {
-      score += 1000 * multiplier.perfect * multiplier.combo40;
-    } else {
-      score += 1000 * multiplier.perfect;
-    }
-  } else if (Math.abs(accuracy) < 0.2) {
-    displayAccuracy('good');
-    showHitEffect(index);
-    hits.good++;
-    comboText.innerHTML = ++combo;
-
-    if (combo >= 80) {
-      score += 1000 * multiplier.good * multiplier.combo80;
-    } else if (combo >= 40) {
-      score += 1000 * multiplier.good * multiplier.combo40;
-    } else {
-      score += 1000 * multiplier.good;
-    }
-  } else if (Math.abs(accuracy) < 0.3) {
-    displayAccuracy('bad');
-    showHitEffect(index);
-    hits.bad++;
-    combo = 0;
-    comboText.innerHTML = '';
-
-    if (combo >= 80) {
-      score += 1000 * multiplier.bad * multiplier.combo40;
-    } else if (combo >= 40) {
-      score += 1000 * multiplier.bad * multiplier.combo80;
-    } else {
-      score += 1000 * multiplier.bad;
-    }
+var getHitJudgement = function (accuracy) {
+  if (accuracy < 0.1) {
+    return 'perfect';
+  } else if (accuracy < 0.2) {
+    return 'good';
+  } else if (accuracy < 0.3) {
+    return 'bad';
   } else {
-    displayAccuracy('miss');
-    hits.miss++;
-    combo = 0;
-    comboText.innerHTML = '';
+    return 'miss';
   }
-
-  maxCombo = maxCombo > combo ? maxCombo : combo;
-  tracks[index].removeChild(tracks[index].firstChild);
-  song.sheet[index].next++;
 };
 
 var displayAccuracy = function (accuracy) {
-  document.querySelector('.hit__accuracy').remove();
   var accuracyText = document.createElement('div');
+  document.querySelector('.hit__accuracy').remove();
   accuracyText.classList.add('hit__accuracy');
   accuracyText.classList.add('hit__accuracy--' + accuracy);
   accuracyText.innerHTML = accuracy;
@@ -336,6 +241,41 @@ var showHitEffect = function (index) {
   var hitEffect = document.createElement('div');
   hitEffect.classList.add('key__hit');
   key.appendChild(hitEffect);
+};
+
+var updateHits = function (judgement) {
+  hits[judgement]++;
+};
+
+var updateCombo = function (judgement) {
+  if (judgement === 'bad' || judgement === 'miss') {
+    combo = 0;
+    comboText.innerHTML = '';
+  } else {
+    comboText.innerHTML = ++combo;
+  }
+};
+
+var updateMaxCombo = function () {
+  maxCombo = maxCombo > combo ? maxCombo : combo;
+};
+
+var calculateScore = function (judgement) {
+  if (combo >= 80) {
+    score += 1000 * multiplier[judgement] * multiplier.combo80;
+  } else if (combo >= 40) {
+    score += 1000 * multiplier[judgement] * multiplier.combo40;
+  } else {
+    score += 1000 * multiplier[judgement];
+  }
+};
+
+var removeNoteFromTrack = function (parent, child) {
+  parent.removeChild(child);
+};
+
+var updateNext = function (index) {
+  song.sheet[index].next++;
 };
 
 window.onload = function () {
