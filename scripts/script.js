@@ -84,6 +84,28 @@ var setupSpeed = function () {
   });
 };
 
+var setupChallenge = function () {
+  var enabled = false;
+  var challenge = document.querySelector('.config__challenge');
+  challenge.addEventListener('click', function (event) {
+    if (enabled) {
+      event.target.className = 'btn btn--small';
+      enabled = false;
+    } else {
+      event.target.className = 'btn btn--small btn--selected';
+      enabled = true;
+      updateAnimation();
+    }
+  });
+};
+
+var updateAnimation = function () {
+  var notes = document.querySelectorAll('.note');
+  notes.forEach(function (note) {
+    note.style.animationName = 'moveDownFade';
+  });
+};
+
 var setupStartButton = function () {
   document.querySelector('.btn--start').addEventListener('click', function () {
     isPlaying = true;
@@ -285,6 +307,7 @@ window.onload = function () {
 
   initializeNotes();
   setupSpeed();
+  setupChallenge();
   setupStartButton();
   setupKeys();
   setupNoteMiss();

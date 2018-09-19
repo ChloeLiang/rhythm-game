@@ -215,6 +215,11 @@ h2 {
   transition: all 1s;
 }
 
+.menu__config {
+  display: flex;
+  justify-content: space-around;
+}
+
 .heart {
   color: rgb(255, 59, 59);
 }
@@ -233,7 +238,6 @@ h2 {
   text-decoration: none;
   transition: all .2s;
   color: white;
-
   margin: 0 auto;
   transition: all .2s;
 }
@@ -245,8 +249,11 @@ h2 {
 }
 
 .btn--small {
-  padding: 2.5rem;
+  width: 7rem;
+  height: 7rem;
   border-radius: 50%;
+  line-height: 7rem;
+  vertical-align: center;
 }
 
 .btn--primary {
@@ -254,7 +261,12 @@ h2 {
   padding: 2rem 4rem;
 }
 
-.menu__speed .btn--selected {
+.config__speed .btn--selected {
+  background: white;
+  color: black;
+}
+
+.config__challenge .btn--selected {
   background: white;
   color: black;
 }
@@ -344,14 +356,17 @@ h2 {
   100% { top: 105%; opacity: 0; }
 }
 
+@keyframes moveDownFade {
+  0% { top: -1.5rem; }
+  60% { opacity: 1; }
+  80% { opacity: 0; }
+  98% { top: 100%; opacity: 0; }
+  100% { top: 105%; opacity: 0; }
+}
+
 @keyframes fade {
   10% { opacity: 1; }
   100% { opacity: 0; }
-}
-
-@keyframes scaleFade {
-  0% { opacity: 1; width: 90%; }
-  100% { opacity: 0; width: 200%; }
 }
 
 @keyframes scaleFade {
