@@ -2,7 +2,7 @@ var isHolding = {
   s: false,
   d: false,
   f: false,
-  space: false,
+  ' ': false,
   j: false,
   k: false,
   l: false
@@ -139,6 +139,8 @@ var startTimer = function (duration) {
     if (--timer < 0) {
       clearInterval(songDurationInterval);
       showResult();
+      comboText.style.transition = 'all 1s';
+      comboText.style.opacity = 0;
     }
   }, 1000);
 };
