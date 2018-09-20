@@ -13,6 +13,7 @@ var multiplier = {
   perfect: 1,
   good: 0.8,
   bad: 0.5,
+  miss: 0,
   combo40: 1.05,
   combo80: 1.10
 };
@@ -21,6 +22,7 @@ var speed = 0;
 var combo = 0;
 var maxCombo = 0;
 var score = 0;
+var animation = 'moveDown';
 var startTime;
 var trackContainer;
 var tracks;
@@ -44,7 +46,7 @@ var initializeNotes = function () {
       noteElement.classList.add('note');
       noteElement.classList.add('note--' + index);
       noteElement.style.backgroundColor = key.color;
-      noteElement.style.animationName = 'moveDown';
+      noteElement.style.animationName = animation;
       noteElement.style.animationTimingFunction = 'linear';
       noteElement.style.animationDuration = note.duration - speed + 's';
       noteElement.style.animationDelay = note.delay + speed + 's';
@@ -100,10 +102,8 @@ var setupChallenge = function () {
 };
 
 var updateAnimation = function () {
-  var notes = document.querySelectorAll('.note');
-  notes.forEach(function (note) {
-    note.style.animationName = 'moveDownFade';
-  });
+  animation = 'moveDownFade';
+  initializeNotes();
 };
 
 var setupStartButton = function () {
