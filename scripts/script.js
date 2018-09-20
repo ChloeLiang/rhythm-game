@@ -107,7 +107,8 @@ var updateAnimation = function () {
 };
 
 var setupStartButton = function () {
-  document.querySelector('.btn--start').addEventListener('click', function () {
+  var startButton = document.querySelector('.btn--start');
+  startButton.addEventListener('click', function () {
     isPlaying = true;
     startTime = Date.now();
 
@@ -170,8 +171,8 @@ var setupNoteMiss = function () {
 };
 
 /**
- * Allows keys to be only pressed one time.
- * Prevents keydown event from being handled multiple times while held down.
+ * Allows keys to be only pressed one time. Prevents keydown event
+ * from being handled multiple times while held down.
  */
 var setupKeys = function () {
   document.addEventListener('keydown', function (event) {
@@ -224,8 +225,8 @@ var judge = function (index) {
   var hitJudgement;
 
   /**
-   * As long as the note has travelled less than 3/4 of the height of the track,
-   * any key press on this track will be ignored.
+   * As long as the note has travelled less than 3/4 of the height of
+   * the track, any key press on this track will be ignored.
    */
   if (accuracy > (nextNote.duration - speed) / 4) {
     return;
