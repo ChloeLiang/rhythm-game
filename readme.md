@@ -1,4 +1,4 @@
-# Introduction
+# Rhythm
 
 This is a web-based rhythm game written in HTML, CSS and JavaScript.
 
@@ -9,8 +9,18 @@ The note animation is hard-coded.
 
 ![screenshot](./img/screenshot.gif)
 
-# Run
+## Getting Started
 
 It is recommended to play this game on Google Chrome.
 
 Visit [this page](https://chloeliang.github.io/rhythm-game/) to play the game.
+
+## Contributing
+
+When contributing to this repository, please first discuss the change you wish to
+make via issue, email, or any other method with the owners of this repository
+before making a change.
+
+## License
+
+This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
